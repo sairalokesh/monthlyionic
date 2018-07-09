@@ -1,0 +1,219 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+  <ion-card-content>
+    <div class="panel text-center bg-teal-400 has-bg-image">
+      <div class="panel-body">
+        <h6 class="text-semibold no-margin-bottom mt-5">Yearly</h6>
+      </div>
+      <div class="panel-body panel-body-accent pb-15">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 col-md-12 col-xl-12 >
+              <div class="text-uppercase text-size-mini text-muted">Income</div>
+              <h5 class="text-semibold no-margin">{{yearlystatistic.income
+                | currency:'INR'}}</h5>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12 col-md-12 col-xl-12 >
+              <div class="text-uppercase text-size-mini text-muted">Expenses</div>
+              <h5 class="text-semibold no-margin">{{yearlystatistic.expenses
+                | currency:'INR'}}</h5>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12 col-md-12 col-xl-12 >
+              <div class="text-uppercase text-size-mini text-muted">{{yearlystatistic.income >= yearlystatistic.expenses?'Credit':'Debit'}}</div>
+              <h5 class="text-semibold no-margin">{{(yearlystatistic.income
+                - yearlystatistic.expenses) | currency:'INR'}}</h5>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="panel text-center bg-blue-400 has-bg-image">
+        <div class="panel-body">
+          <h6 class="text-semibold no-margin-bottom mt-5">Monthly</h6>
+        </div>
+        <div class="panel-body panel-body-accent pb-15">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini opacity-75">Income</div>
+                <h5 class="text-semibold no-margin">{{monthlystatistic.income
+                  | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini opacity-75">Expenses</div>
+                <h5 class="text-semibold no-margin">{{monthlystatistic.expenses
+                  | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini opacity-75">{{monthlystatistic.income >= monthlystatistic.expenses?'Credit':'Debit'}}</div>
+                <h5 class="text-semibold no-margin">{{(monthlystatistic.income
+                  - monthlystatistic.expenses) | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="panel text-center bg-danger-400 has-bg-image">
+        <div class="panel-body">
+          <h6 class="text-semibold no-margin-bottom mt-5">This Week</h6>
+        </div>
+        <div class="panel-body panel-body-accent pb-15">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini text-muted">Income</div>
+                <h5 class="text-semibold no-margin">{{weeklystatistic.income
+                  | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini text-muted">Expenses</div>
+                <h5 class="text-semibold no-margin">{{weeklystatistic.expenses
+                  | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini text-muted">{{weeklystatistic.income >= weeklystatistic.expenses?'Credit':'Debit'}}</div>
+                <h5 class="text-semibold no-margin">{{(weeklystatistic.income
+                  - weeklystatistic.expenses) | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="panel text-center bg-indigo-400 has-bg-image">
+        <div class="panel-body">
+          <h6 class="text-semibold no-margin-bottom mt-5">Today</h6>
+        </div>
+        <div class="panel-body panel-body-accent pb-15">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini opacity-75">Income</div>
+                <h5 class="text-semibold no-margin">{{todaystatistic.income
+                  | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini opacity-75">Expenses</div>
+                <h5 class="text-semibold no-margin">{{todaystatistic.expenses
+                  | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-12 col-md-12 col-xl-12 >
+                <div class="text-uppercase text-size-mini opacity-75">{{todaystatistic.income >= todaystatistic.expenses?'Credit':'Debit'}}</div>
+                <h5 class="text-semibold no-margin">{{(todaystatistic.income
+                  - todaystatistic.expenses) | currency:'INR'}}</h5>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Monthly
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Yearly
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Monthly
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Current Month Transactions
+    </ion-card-header>
+    <ion-card-content>
+      <table>
+        <thead>
+        <tr>
+          <th>Category</th>
+          <th>Transaction Date</th>
+          <th>Credit</th>
+          <th>Debit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{transaction.category}}</td>
+          <td>{{transaction.transactionDate | date : 'dd-MM-yyyy hh:mm:ss a'}}</td>
+          <td>{{transaction.creditAmount | currency:'INR'}}</td>
+          <td>{{transaction.debitAmount | currency:'INR'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+
+
+
+</ion-content>

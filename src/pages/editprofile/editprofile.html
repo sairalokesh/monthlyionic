@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title><a href="javascript:void(0)" (click)="backtoprevious()"><ion-icon name="arrow-back"></ion-icon></a>&nbsp;Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider color="danger">Personal Details</ion-item-divider>
+    <form name="form" #userForm="ngForm">
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input type="text" id="firstName" [(ngModel)]="loginuser.firstName"  name="firstName" required="required" #firstName="ngModel" pattern="[a-zA-Z ]*"></ion-input>
+        <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!firstName.errors.required">
+            First Name is required!
+          </div>
+          <div [hidden]="!firstName.errors.pattern">
+            First Name Must be a alphabetic!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input type="text" class="form-control" placeholder="Last Name *" id="lastName" [(ngModel)]="loginuser.lastName"  name="lastName" required="required" #lastName="ngModel" pattern="[a-zA-Z ]*"></ion-input>
+        <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!lastName.errors.required">
+            Last Name is required!
+          </div>
+          <div [hidden]="!lastName.errors.pattern">
+            Last Name Must be a alphabetic!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text" id="email" [(ngModel)]="loginuser.email"  name="email" required="required" #email="ngModel" pattern="^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$" class="form-control" [readonly]="true"></ion-input>
+        <div *ngIf="email.errors && (email.dirty || email.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!email.errors.required">
+            Email is required!
+          </div>
+          <div [hidden]="!email.errors.pattern">
+            Must be a valid Email!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input type="text" class="form-control" id="phonenumber" [(ngModel)]="loginuser.phoneNumber" pattern="[0-9]*"  name="phonenumber" required="required" #phonenumber="ngModel" minlength="10" maxlength="12" class="form-control"></ion-input>
+        <div *ngIf="phonenumber.errors && (phonenumber.dirty || phonenumber.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!phonenumber.errors.required">
+            Password is required!
+          </div>
+          <div [hidden]="!phonenumber.errors.minlength">
+            Password must be at least 5 characters long.
+          </div>
+          <div [hidden]="!phonenumber.errors.maxlength">
+            Password cannot be more than 12 characters long.
+          </div>
+        </div>
+      </ion-item>
+      <ion-item>
+        <button ion-button block color="primary" type="submit" (click)="updateprofile(loginuser)" [disabled]="!userForm.form.valid">Update Profile</button>
+      </ion-item>
+    </form>
+    <br/>
+    <ion-item-divider color="danger">Password Details</ion-item-divider>
+    <form name="form" #passwordForm="ngForm">
+      <ion-item>
+      <ion-label floating>Old Password</ion-label>
+      <ion-input type="text" id="oldpassword" [(ngModel)]="passworduser.orginalPassword"  name="oldpassword" required="required" #oldpassword="ngModel" minlength="5" maxlength="12" class="form-control" [readonly]="true"></ion-input>
+      <div *ngIf="oldpassword.errors && (oldpassword.dirty || oldpassword.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+        <div [hidden]="!oldpassword.errors.required">
+          Password is required!
+        </div>
+        <div [hidden]="!oldpassword.errors.minlength">
+          Password must be at least 5 characters long.
+        </div>
+        <div [hidden]="!oldpassword.errors.maxlength">
+          Password cannot be more than 12 characters long.
+        </div>
+      </div>
+    </ion-item>
+
+      <ion-item>
+        <ion-label floating>New Password</ion-label>
+        <ion-input type="password" id="newpassword" [(ngModel)]="passworduser.newPassword"  name="newpassword" required="required" #newpassword="ngModel" minlength="5" maxlength="12" class="form-control" (input)="validatePassword(passworduser.newPassword,passworduser.confirmPassword)"></ion-input>
+        <div *ngIf="newpassword.errors && (newpassword.dirty || newpassword.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!newpassword.errors.required">
+            Password is required!
+          </div>
+          <div [hidden]="!newpassword.errors.minlength">
+            Password must be at least 5 characters long.
+          </div>
+          <div [hidden]="!newpassword.errors.maxlength">
+            Password cannot be more than 12 characters long.
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>confirm Password</ion-label>
+        <ion-input type="password" id="confirmpassword" [(ngModel)]="passworduser.confirmPassword"  name="confirmpassword" required="required" #confirmpassword="ngModel" class="form-control" (input)="validatePassword(passworduser.newPassword,passworduser.confirmPassword)"></ion-input>
+        <div *ngIf="confirmpassword.errors && (confirmpassword.dirty || confirmpassword.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!confirmpassword.errors.required">
+            Password is required!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <button ion-button block color="primary" type="submit" (click)="updatepassword(passworduser)" [disabled]="!passwordForm.form.valid || !passwordsubmit">Update Password </button>
+      </ion-item>
+    </form>
+    <br/>
+
+    <ion-item-divider color="danger">User Signature Upload</ion-item-divider>
+    <ion-item>
+      <signature-pad [options]="signaturePadOptions" id="signatureCanvas"></signature-pad>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <button ion-button full color="secondary" (click)="drawComplete()">Done</button>
+          </ion-col>
+          <ion-col col-6>
+            <button ion-button full color="light" (click)="drawClear()">Clear</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <br/>
+
+    <ion-item-divider color="danger">User Profile Upload</ion-item-divider>
+    <ion-item>
+      <ion-input type="file" #profilepic accept="image/*" id="profileupload" (change)="selectUserProfilePic($event,loginuser.id)"></ion-input>
+    </ion-item>
+    <br/>
+    <ion-item-divider color="danger">User Background Upload</ion-item-divider>
+    <ion-item>
+      <ion-input type="file" #backgroundpic accept="image/*" id="backgroundupload" (change)="selectUserBackgroundPic($event,loginuser.id)"></ion-input>
+    </ion-item>
+    <br/>
+  </ion-list>
+</ion-content>
+
+

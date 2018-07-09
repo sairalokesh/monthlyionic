@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>&nbsp;Recent Transaction</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form name="form" #transForm="ngForm">
+    <p *ngIf="errorMessage" style="color: #f5457d;text-align: center;font-size: medium;font-family: initial;font-weight: bold;">{{errorMessage}}</p>
+    <p *ngIf="successMessage" style="color: #84BF41;text-align: center;font-size: medium;font-family: initial;font-weight: bold;">{{successMessage}}</p>
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>From</ion-label>
+        <ion-datetime pickerFormat="DD-MM-YYYY HH:mm" displayFormat="DD-MM-YYYY hh:mm a" [(ngModel)]="searchtransaction.dbStartDate" name="minTransactionDate" id="minTransactionDate" #minTransactionDate="ngModel" required="required"></ion-datetime>
+        <div *ngIf="minTransactionDate.errors && (minTransactionDate.dirty || minTransactionDate.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!minTransactionDate.errors.required">
+            Min Transaction Date is required!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>To</ion-label>
+        <ion-datetime pickerFormat="DD-MM-YYYY HH:mm" displayFormat="DD-MM-YYYY hh:mm a" [(ngModel)]="searchtransaction.dbEndDate" name="maxTransactionDate" id="maxTransactionDate" #maxTransactionDate="ngModel" required="required" [min]="searchtransaction.dbStartDate"></ion-datetime>
+        <div *ngIf="maxTransactionDate.errors && (maxTransactionDate.dirty || maxTransactionDate.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!maxTransactionDate.errors.required">
+            Max Transaction Date is required!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <button ion-button block color="primary" type="submit" class="btn bg-pink-400 btn-block"
+                (click)="searchTransaction(searchtransaction)" [disabled]="!transForm.form.valid">
+          Search
+        </button>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <ion-card>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <table>
+        <thead>
+        <tr>
+          <th>Category</th>
+          <th>Transaction Date</th>
+          <th>Credit</th>
+          <th>Debit</th>
+          <th>Location</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{transaction.category}}</td>
+          <td>{{transaction.transactionDate | date : 'dd-MM-yyyy hh:mm:ss a'}}</td>
+          <td>{{transaction.creditAmount | currency:'INR'}}</td>
+          <td>{{transaction.debitAmount | currency:'INR'}}</td>
+          <td>{{transaction.location}}</td>
+          <td>{{transaction.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+

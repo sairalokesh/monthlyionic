@@ -1,0 +1,107 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Add Transaction</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form name="form" #transForm="ngForm">
+    <p *ngIf="errorMessage" style="color: #f5457d;text-align: center;font-size: medium;font-family: initial;font-weight: bold;">{{errorMessage}}</p>
+    <p *ngIf="successMessage" style="color: #84BF41;text-align: center;font-size: medium;font-family: initial;font-weight: bold;">{{successMessage}}</p>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Select Type</ion-label>
+        <ion-select name="type" class="form-control" id="type" [(ngModel)]="transaction.type" required="required" #type="ngModel">
+          <ion-option value="" selected="true">Select Type</ion-option>
+          <ion-option value="Income">Income</ion-option>
+          <ion-option value="Expense">Expense</ion-option>
+        </ion-select>
+        <div *ngIf="type.errors && (type.dirty || type.touched)"
+             style="color: #a94442 !important; font-weight: bold;">
+          <div [hidden]="!type.errors.required">Type is required!</div>
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating>Select Category</ion-label>
+        <ion-select name="category" class="form-control" id="category" required="required" [(ngModel)]="transaction.category" #category="ngModel">
+          <ion-option value="" selected="true">Select Category</ion-option>
+          <ion-option *ngFor="let category of categories" [value]="category">
+            {{category}}</ion-option>
+        </ion-select>
+        <div
+          *ngIf="category.errors && (category.dirty || category.touched)"
+          style="color: #a94442 !important; font-weight: bold;">
+          <div [hidden]="!category.errors.required">Category is
+            required!</div>
+        </div>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label floating>Amount</ion-label>
+        <ion-input name="amount" type="text" class="form-control" id="amount" required="required" [(ngModel)]="transaction.amount" #amount="ngModel" pattern="[0-9.]*"></ion-input>
+        <div *ngIf="amount.errors && (amount.dirty || amount.touched)"
+             style="color: #a94442 !important; font-weight: bold;">
+          <div [hidden]="!amount.errors.required">Amount is
+            required!</div>
+          <div [hidden]="!amount.errors.pattern">Must be a valid
+            Amount!</div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Date & Time</ion-label>
+        <ion-datetime pickerFormat="DD-MM-YYYY HH:mm" displayFormat="DD-MM-YYYY hh:mm a" [(ngModel)]="transaction.dbTransactionDate" name="dbTransactionDate" id="dbTransactionDate" #dbTransactionDate="ngModel" required="required"></ion-datetime>
+        <div *ngIf="dbTransactionDate.errors && (dbTransactionDate.dirty || dbTransactionDate.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+          <div [hidden]="!dbTransactionDate.errors.required">
+            Transaction Date is required!
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Location</ion-label>
+        <ion-input name="location" type="text" class="form-control"
+                   id="location" required="required"
+                   #search [(ngModel)]="transaction.location" #location="ngModel"
+                   autocorrect="off" autocapitalize="off" spellcheck="off"></ion-input>
+        <div
+          *ngIf="location.errors && (location.dirty || location.touched)"
+          style="color: #a94442 !important; font-weight: bold;">
+          <div [hidden]="!location.errors.required">Location is
+            required!</div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea class="form-control" name="description" required="required" id="description" [(ngModel)]="transaction.description" #description="ngModel"></ion-textarea>
+        <div
+          *ngIf="description.errors && (description.dirty || description.touched)"
+          style="color: #a94442 !important; font-weight: bold;">
+          <div [hidden]="!description.errors.required">Description
+            is required!</div>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div #map id="map" style="position: inherit!important;overflow: visible!important;height: 200px!important;"></div>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <button ion-button block color="primary" type="submit" class="btn bg-pink-400 btn-block"
+          (click)="saveTransaction(transaction)" [disabled]="!transForm.form.valid">
+    Save Transaction
+  </button>
+</ion-footer>
+
+

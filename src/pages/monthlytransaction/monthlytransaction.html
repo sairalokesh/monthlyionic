@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title><a href="javascript:void(0)" (click)="backtoprevious()"><ion-icon name="arrow-back"></ion-icon></a>&nbsp; {{monthyear}} transactions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div #map id="map" style="position: inherit!important;overflow: visible!important;height: 300px!important;"></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <table>
+        <thead>
+        <tr>
+          <th>Category</th>
+          <th>Transaction Date</th>
+          <th>Credit</th>
+          <th>Debit</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{transaction.category}}</td>
+          <td>{{transaction.transactionDate | date : 'dd-MM-yyyy hh:mm a'}}</td>
+          <td>{{transaction.creditAmount | currency:'INR'}}</td>
+          <td>{{transaction.debitAmount | currency:'INR'}}</td>
+          <td><a href="javascript:void(0)" (click)="editTransaction(transaction.id)"><ion-icon name="checkbox"></ion-icon></a></td>
+          <td><a href="javascript:void(0)" (click)="deleteTransaction(transaction.id)"><ion-icon name="trash" style="color: red"></ion-icon></a></td>
+        </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <button ion-button block color="primary" (click)="addnewtransaction()">Add New Monthly Transaction</button>
+</ion-footer>

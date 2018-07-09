@@ -1,0 +1,167 @@
+page-transactions {
+  .content-divider {
+    text-align: center!important;
+    position: relative!important;
+    z-index: 1!important;
+  }
+
+  .text-center {
+    text-align: center!important;
+  }
+
+  .content-divider>span {
+    background-color: #eeeded!important;
+    display: inline-block!important;
+    padding-left: 16px!important;
+    padding-right: 16px!important;
+  }
+  .pb-10 {
+    padding-bottom: 10px !important;
+  }
+  .pt-10 {
+    padding-top: 10px !important;
+  }
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  }
+  .panel-body {
+    position: relative;
+  }
+  .panel-body {
+    padding: 20px;
+  }
+  .pull-right {
+    float: right !important;
+  }
+  .col-md-12{
+    width: 100%!important;
+  }
+  .col-sm-12{
+    width: 100%!important;
+  }
+
+  .text-semibold {
+    font-weight: 500!important;
+  }
+  .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -.015em!important;
+  }
+  .h6, h6 {
+    font-size: 15px!important;
+  }
+  .h4, .h5, .h6, h4, h5, h6 {
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+  }
+  .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 400;
+    line-height: 1.5384616;
+    color: inherit;
+  }
+  h6 {
+    display: block;
+    font-size: 0.67em;
+    font-weight: bold;
+  }
+
+  .panel-footer-condensed {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .panel-footer {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  .panel-footer {
+    background-color: #fcfcfc;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+  }
+  .panel-footer>.heading-elements {
+    position: static;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .heading-elements {
+    background-color: inherit;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    height: 38px;
+    margin-top: -19px;
+  }
+  .heading-elements .list-inline {
+    margin-bottom: 0;
+  }
+  .invoice-grid ol, .invoice-grid ul {
+    margin-bottom: 0;
+  }
+  .list-inline {
+    margin-left: 0;
+    font-size: 0;
+  }
+
+  .list-inline {
+    padding-left: 0;
+    list-style: none;
+    margin-left: -5px;
+  }
+  ol, ul {
+    padding-left: 25px;
+  }
+  ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+  }
+  .list-inline-condensed>li {
+    padding-right: 10px;
+  }
+  .list-inline>li {
+    padding-left: 0;
+    padding-right: 20px;
+    font-size: 13px;
+  }
+  .list-inline>li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+  }
+  .text-default, .text-default:focus, .text-default:hover {
+    color: #333!important;
+  }
+  a, button, input, textarea {
+    outline: 0;
+  }
+  a {
+    cursor: pointer;
+  }
+  a {
+    color: #1e88e5;
+    text-decoration: none;
+  }
+  a {
+    background-color: transparent;
+  }
+
+}

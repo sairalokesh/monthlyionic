@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>transactions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let transaction of transactions">
+  <ion-card>
+    <ion-card-content>
+        <div class="text-center content-group text-muted content-divider">
+          <span class="pt-10 pb-10">{{transaction.year}}</span>
+        </div>
+    </ion-card-content>
+  </ion-card>
+    <ion-card *ngFor="let monthlytransaction of transaction.transactions">
+      <ion-card-content>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel invoice-grid">
+
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h6 class="text-semibold no-margin-top" style="color: #2a91d6;">
+                      Income <span class="pull-right">{{monthlytransaction.income
+													| currency:'INR'}}</span>
+                    </h6>
+                    <h6 class="text-semibold no-margin-top" style="color: #f66183;">
+                      Expenses <span class="pull-right">{{monthlytransaction.expense
+													| currency:'INR'}}</span>
+                    </h6>
+                    <hr />
+                    <h6 class="text-semibold no-margin-top" style="color: #3f5f53;">
+                      Remaining <span class="pull-right">{{(monthlytransaction.income
+													- monthlytransaction.expense) | currency:'INR'}}</span>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-footer panel-footer-condensed">
+                <div class="heading-elements">
+                  <ion-icon name="calendar" style="margin-right: 10px;"></ion-icon><span class="text-semibold">{{monthlytransaction.monthYear}}</span>
+
+                  <ul
+                    class="list-inline list-inline-condensed heading-text pull-right">
+                    <li><a href="javascript:void(0)" class="text-default" (click)="getMothlyTransactions(monthlytransaction.monthYear)"><ion-icon name="eye"></ion-icon></a></li>
+                    <li><a href="javascript:void(0)" class="text-default" (click)="getMothlyInvoice(monthlytransaction.monthYear)"><ion-icon name="print"></ion-icon></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </ion-card-content>
+  </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button block color="primary" (click)="addnewtransaction()">Add New Transaction</button>
+</ion-footer>
+

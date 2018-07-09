@@ -1,0 +1,56 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-divider color="danger">Profile & Background Details</ion-item-divider>
+  <ion-card text-center class="hide-card" [style.background-image]="'url(' + loginuser.backgroundImageName + ')'">
+    <img src="{{loginuser.userProfileName}}" class="custom-avatar"/>
+</ion-card>
+  <ion-list>
+    <ion-item-divider color="danger">Personal Details</ion-item-divider>
+    <ion-item>
+      <ion-label>First Name</ion-label>
+      <ion-input [readonly]="true" [(ngModel)]="loginuser.firstName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Last Name</ion-label>
+      <ion-input type="text" [readonly]="true" [(ngModel)]="loginuser.lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input readonly type="email" [readonly]="true" [(ngModel)]="loginuser.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="text" [readonly]="true" [(ngModel)]="loginuser.orginalPassword"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Phone</ion-label>
+      <ion-input type="tel" [readonly]="true" [(ngModel)]="loginuser.phoneNumber"></ion-input>
+    </ion-item>
+    <br/>
+
+    <ion-item-divider color="danger" *ngIf="loginuser.signatureName!=''">Signature</ion-item-divider>
+    <ion-item *ngIf="loginuser.signatureName!=''">
+      <img src="{{loginuser.signatureName}}"/>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <button ion-button block color="primary" (click)="edituser()">Edit</button>
+</ion-footer>
+

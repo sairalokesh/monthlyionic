@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Categories</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--<ion-list>
+    <ion-item *ngFor="let category of categories">
+      <a href="javasript:void(0)" style="text-decoration: none;">
+        <h2 style="font-style: revert;"> {{category}} </h2>
+        <img src="./assets/flat/{{category}}.jpg"/>
+      </a>
+    </ion-item>
+  </ion-list>-->
+  <ion-row *ngFor="let category of categories">
+    <a href="javasript:void(0)" style="text-decoration: none;" (click)="viewcategory(category)">
+      <ion-col col-12 col-md-12 col-xl-12 >
+        <div class="text-uppercase text-size-mini text-muted"> <h5 style="font-style: revert;"> {{category}} </h5></div>
+        <h5 class="text-semibold no-margin"><img src="./assets/flat/{{category}}.jpg"/></h5>
+      </ion-col>
+    </a>
+    <hr/>
+  </ion-row>
+</ion-content>

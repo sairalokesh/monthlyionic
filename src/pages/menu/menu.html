@@ -1,0 +1,28 @@
+<ion-menu [content]="content">
+<ion-header>
+  <ion-navbar>
+    <ion-title>Monthly Expenses</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<!--<ion-card text-center class="hide-card" [style.background-image]="'url(' + backgroundImageName + ')'" [style.width.px]="268" [style.height.px]="241">
+    <img src="{{userProfileName}}" class="custom-avatar"/>
+    <h2>{{firstName}} {{lastName}}</h2>
+    <p>{{email}}</p>
+    <p>{{createdDate | date:'dd-MMM-yyyy'}}</p>
+</ion-card>-->
+<ion-list>
+<button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+  <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+  {{p.title}}
+</button>
+  <button ion-item menuClose (click)="logout()">
+    <ion-icon item-start name="log-out"></ion-icon>
+    Logout
+  </button>
+</ion-list>
+</ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

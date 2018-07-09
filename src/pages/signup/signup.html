@@ -1,0 +1,90 @@
+<ion-content [style.background-image]="'url(' + emailuser.backgroundImageName + ')'" class="background">
+  <ion-card>
+    <ion-card-header>
+      <img src="{{emailuser.userProfileName}}" class="user">
+      <div class="loginform">Signup Form</div>
+    </ion-card-header>
+    <ion-card-content>
+      <form name="form" #loginForm="ngForm">
+        <p *ngIf="errorMessage" style="color: #f5457d;text-align: center;font-size: medium;font-family: initial;font-weight: bold;">{{errorMessage}}</p>
+        <p *ngIf="successMessage" style="color: #84BF41;text-align: center;font-size: medium;font-family: initial;font-weight: bold;">{{successMessage}}</p>
+        <ion-list no-lines>
+
+          <ion-item>
+            <ion-input type="text" placeholder="First Name *" id="firstName" [(ngModel)]="register.firstName"  name="firstName" required="required" #firstName="ngModel" pattern="[a-zA-Z]*"></ion-input>
+          </ion-item>
+
+          <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+            <div [hidden]="!firstName.errors.required">
+              First Name is required!
+            </div>
+            <div [hidden]="!firstName.errors.pattern">
+              First Name Must be a alphabetic!
+            </div>
+          </div>
+
+          <ion-item>
+            <ion-input type="text" class="form-control" placeholder="Last Name *" id="lastName" [(ngModel)]="register.lastName"  name="lastName" required="required" #lastName="ngModel" pattern="[a-zA-Z]*"></ion-input>
+          </ion-item>
+          <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+            <div [hidden]="!lastName.errors.required">
+              Last Name is required!
+            </div>
+            <div [hidden]="!lastName.errors.pattern">
+              Last Name Must be a alphabetic!
+            </div>
+          </div>
+          <ion-item>
+            <ion-input type="text" id="registeremail" [(ngModel)]="register.email"  name="registeremail" required="required" #registeremail="ngModel" pattern="^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$" class="form-control" placeholder="Email *" (change)="emailcheck(register.email)"></ion-input>
+          </ion-item>
+          <div *ngIf="registeremail.errors && (registeremail.dirty || registeremail.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+            <div [hidden]="!registeremail.errors.required">
+              Email is required!
+            </div>
+            <div [hidden]="!registeremail.errors.pattern">
+              Must be a valid Email!
+            </div>
+          </div>
+          <ion-item>
+            <ion-input type="password" id="registerpassword" [(ngModel)]="register.password"  name="registerpassword" required="required" #registerpassword="ngModel" minlength="5" maxlength="12" class="form-control" placeholder="Password *"></ion-input>
+          </ion-item>
+          <div *ngIf="registerpassword.errors && (registerpassword.dirty || registerpassword.touched)"  style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+            <div [hidden]="!registerpassword.errors.required">
+              Password is required!
+            </div>
+            <div [hidden]="!registerpassword.errors.minlength">
+              Password must be at least 5 characters long.
+            </div>
+            <div [hidden]="!registerpassword.errors.maxlength">
+              Password cannot be more than 12 characters long.
+            </div>
+          </div>
+          <ion-item>
+            <ion-input type="text" class="form-control" placeholder="phone number *" id="phonenumber" [(ngModel)]="register.phoneNumber" pattern="[0-9]*"  name="phonenumber" required="required" #phonenumber="ngModel" minlength="10" maxlength="12" class="form-control"></ion-input>
+          </ion-item>
+          <div *ngIf="registerpassword.errors && (registerpassword.dirty || registerpassword.touched)" style="color: #ffe004 !important;font-weight: bold;float: left;font-size: 13px;">
+            <div [hidden]="!registerpassword.errors.required">
+              Password is required!
+            </div>
+            <div [hidden]="!registerpassword.errors.minlength">
+              Password must be at least 5 characters long.
+            </div>
+            <div [hidden]="!registerpassword.errors.maxlength">
+              Password cannot be more than 12 characters long.
+            </div>
+          </div>
+        </ion-list>
+        <button ion-button block outline color="light" type="submit" (click)="userSignup(register)" [disabled]="!loginForm.form.valid">signup <i class="icon-arrow-right14 position-right"></i></button>
+      </form>
+      <p>OR</p>
+      <button ion-button block color="facebook"  (click)="signInWithFB()">
+        <ion-icon name="logo-facebook"></ion-icon> Login with facebook
+      </button>
+      <button ion-button block color="googleplus"  (click)="signInWithGoogle()">
+        <ion-icon name="logo-googleplus"></ion-icon> Login with Google
+      </button>
+      <button ion-button  clear full color="light" class="bottom" (click)="LoginPage()">Do have already account? Login in</button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
