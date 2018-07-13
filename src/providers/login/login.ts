@@ -10,16 +10,15 @@ export class LoginProvider {
     console.log('Hello LoginProvider Provider');
   }
 
-  userLogin(user):Observable<any> {
-    const headers = new HttpHeaders({'Access-Control-Allow-Origin':'*'});
-    return this.http.post(AppSettings.API_ENDPOINT+'login', user,{headers: headers});
-  }
-
   checkemail(email):Observable<any> {
     const headers = new HttpHeaders({'Access-Control-Allow-Origin':'*'});
     return this.http.get(AppSettings.API_ENDPOINT+'checkemail/' + email,{headers: headers});
   }
 
+  userLogin(user):Observable<any> {
+    const headers = new HttpHeaders({'Access-Control-Allow-Origin':'*'});
+    return this.http.post(AppSettings.API_ENDPOINT+'login', user,{headers: headers});
+  }
 
   checkSocialEmail(user):Observable<any> {
     const headers = new HttpHeaders({'Access-Control-Allow-Origin':'*'});

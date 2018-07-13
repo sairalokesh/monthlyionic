@@ -34,7 +34,7 @@ export class CategoriesPage {
   }
 
   viewcategory(category) {
-    this.navCtrl.setRoot("ViewcategoryPage",{
+    this.navCtrl.setRoot("MonthyearcategoryPage",{
       category: category
     });
   }

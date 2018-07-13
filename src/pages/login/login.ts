@@ -29,6 +29,32 @@ export class LoginPage {
     this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
   }
 
+  emailcheck(email) {
+    this.service.checkemail(email).subscribe(
+      data => {
+        if (data) {
+          this.emailuser = data;
+          if (data.backgroundImageName != "" && data.backgroundImageName!=null) {
+            this.emailuser.backgroundImageName = AppSettings.API_ENDPOINT+'userprofile/' + data.backgroundImageName;
+          } else {
+            this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
+          }
+          if (data.userProfileName == "" || data.userProfileName==null) {
+            this.emailuser.userProfileName = 'assets/imgs/user.png';
+          }else{
+            this.emailuser.userProfileName = AppSettings.API_ENDPOINT+'userprofile/' + data.userProfileName;
+          }
+        } else {
+          this.emailuser.userProfileName = 'assets/imgs/user.png';
+          this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
+        }
+      },
+      err => {
+        this.emailuser.userProfileName = 'assets/imgs/user.png';
+        this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
+      });
+  }
+
   userLogin(user: any) {
     this.errorMessage = '';
     this.successMessage = '';
@@ -57,32 +83,6 @@ export class LoginPage {
           this.successMessage = '';
           this.errorMessage = '';
         }, 2000);
-      });
-  }
-
-  emailcheck(email) {
-    this.service.checkemail(email).subscribe(
-      data => {
-        if (data) {
-          this.emailuser = data;
-          if (data.backgroundImageName != "" && data.backgroundImageName!=null) {
-            this.emailuser.backgroundImageName = AppSettings.API_ENDPOINT+'userprofile/' + data.backgroundImageName;
-          } else {
-            this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
-          }
-          if (data.userProfileName == "" || data.userProfileName==null) {
-            this.emailuser.userProfileName = 'assets/imgs/user.png';
-          }else{
-            this.emailuser.userProfileName = AppSettings.API_ENDPOINT+'userprofile/' + data.userProfileName;
-          }
-        } else {
-          this.emailuser.userProfileName = 'assets/imgs/user.png';
-          this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
-        }
-      },
-      err => {
-        this.emailuser.userProfileName = 'assets/imgs/user.png';
-        this.emailuser.backgroundImageName = 'assets/imgs/bg.jpg';
       });
   }
 
@@ -125,7 +125,6 @@ export class LoginPage {
         this.errorMessage = 'Something went to wrong! Please try again';
       });
   }
-
 
   signInWithGoogle(): void {
     this.googlePlus.login({})

@@ -6,7 +6,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title><a href="javascript:void(0)" (click)="backtoprevious()"><ion-icon name="arrow-back"></ion-icon></a>&nbsp;{{category}}</ion-title>
+    <ion-title><a href="javascript:void(0)" (click)="backtoprevious()"><ion-icon name="arrow-back"></ion-icon></a>&nbsp;{{monthyear}} {{category}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,12 +16,6 @@
   <ion-card>
     <ion-card-content>
       <canvas #lineCanvas></canvas>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <canvas #barCanvas></canvas>
     </ion-card-content>
   </ion-card>
 

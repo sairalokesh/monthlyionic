@@ -21,23 +21,20 @@ import { Geolocation } from '@ionic-native/geolocation';
 })
 export class ViewcategoryPage {
 
-  @ViewChild('barCanvas') barCanvas;
   @ViewChild('lineCanvas') lineCanvas;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  barChart: any;
   lineChart: any;
   category: any ='';
   successMessage: any;
   errorMessage: any;
   transactions:any = [];
+  monthyear: any = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              private mapsAPILoader: MapsAPILoader, public geolocation: Geolocation,
-              public transactionProvider: TransactionProvider, public storage: Storage,
-              private ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mapsAPILoader: MapsAPILoader, public geolocation: Geolocation, public transactionProvider: TransactionProvider, public storage: Storage, private ngZone: NgZone) {
      this.category = this.navParams.get('category');
+    this.monthyear = this.navParams.get('monthyear');
   }
 
   ionViewDidLoad() {
@@ -46,7 +43,8 @@ export class ViewcategoryPage {
       this.storage.get('token').then(token => {
         var token = token;
         this.category = this.navParams.get('category');
-        this.transactionProvider.getMonthyearcategorytransactionsCount(loginuser, this.category,token).subscribe(
+        this.monthyear = this.navParams.get('monthyear');
+        this.transactionProvider.getMonthyearcategorytransactionsLineGraph(loginuser, this.category, this.monthyear, token).subscribe(
           data => {
             if (data) {
               this.lineChart = new Chart(this.lineCanvas.nativeElement, {
@@ -87,48 +85,7 @@ export class ViewcategoryPage {
             }, 2000);
           });
 
-        this.transactionProvider.getyearcategorytransactionsCount(loginuser, this.category,token).subscribe(
-          data => {
-            if (data) {
-              this.barChart = new Chart(this.barCanvas.nativeElement, {
-                type: 'bar',
-                data: {
-                  labels: data.monthYear,
-                  datasets: data.dataDTO
-                },
-                options: {
-                  scales: {
-                    yAxes: [{
-                      ticks: {
-                        beginAtZero:true
-                      }
-                    }]
-                  }
-                }
-              });
-
-            } else {
-              const error = data;
-              this.successMessage = '';
-              this.errorMessage = error.message;
-              setTimeout(() => {
-                this.successMessage = '';
-                this.errorMessage = '';
-              }, 2000);
-            }
-
-          },
-          err => {
-            const error = err;
-            this.successMessage = '';
-            this.errorMessage = error.message;
-            setTimeout(() => {
-              this.successMessage = '';
-              this.errorMessage = '';
-            }, 2000);
-          });
-
-        this.transactionProvider.getCategoryTransactions(loginuser, this.category,token).subscribe(
+        this.transactionProvider.getCategoryTransactions(loginuser, this.category, this.monthyear, token).subscribe(
           data => {
             if (data) {
               this.transactions = data;
@@ -200,7 +157,10 @@ export class ViewcategoryPage {
   }
 
   backtoprevious(){
-    this.navCtrl.setRoot("CategoriesPage");
+    this.category = this.navParams.get('category');
+    this.navCtrl.setRoot("MonthyearcategoryPage",{
+      category:  this.category
+    });
   }
 
 }

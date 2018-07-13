@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title><a href="javascript:void(0)" (click)="backtoprevious()"><ion-icon name="arrow-back"></ion-icon></a>&nbsp;{{category}} transactions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let transaction of transactions">
+    <ion-card>
+      <ion-card-content>
+        <div class="text-center content-group text-muted content-divider">
+          <span class="pt-10 pb-10">{{transaction.year}}</span>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let monthlytransaction of transaction.transactions">
+      <ion-card-content>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel invoice-grid">
+              <a href="javascript:void(0)" class="text-default" (click)="getMothlyCategoryTransactions(monthlytransaction.monthYear)" title="Check Here to view">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h6 class="text-semibold no-margin-top" style="color: #2a91d6;">
+                      Month & Year <span class="pull-right">{{monthlytransaction.monthYear}}</span>
+                    </h6>
+                    <h6 class="text-semibold no-margin-top" style="color: #f66183;">
+                      Amount <span class="pull-right">{{monthlytransaction.amount | currency:'INR'}}</span>
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

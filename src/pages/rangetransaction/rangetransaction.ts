@@ -82,12 +82,7 @@ export class RangetransactionPage {
         this.getRangeTransactionsGraph(statics,loginuser,token);
       });
     });
-
   }
-
-
-
-
 
   getSelectedTransactions(statics,loginuser,token) {
     statics.user = loginuser;

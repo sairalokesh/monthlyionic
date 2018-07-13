@@ -20,7 +20,6 @@ export class TransactionProvider {
     return this.http.post(AppSettings.API_ENDPOINT+'transaction/mobilecreate', transaction, {headers: headers});
   }
 
-
   getMonthlytransactionsCount(user, monthyear, token):Observable<any> {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.post(AppSettings.API_ENDPOINT+'statistic/getMonthlytransactionsCount/' + monthyear, user, {headers: headers});
@@ -36,30 +35,34 @@ export class TransactionProvider {
     return this.http.post(AppSettings.API_ENDPOINT+'statistic/getMonthlyTransactions/' + monthyear, user, {headers: headers});
   }
 
-  editMonthlyTransaction(transactionId, token):Observable<any> {
-    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.get(AppSettings.API_ENDPOINT+'transaction/editMobileMonthlyTransaction/'+ transactionId, {headers: headers});
-  }
-
   deleteMonthlyTransaction(transactionId, token):Observable<any> {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.get(AppSettings.API_ENDPOINT+'transaction/deleteMobileMonthlyTransaction/'+ transactionId, {headers: headers});
   }
 
-  getMonthyearcategorytransactionsCount(user, category, token):Observable<any> {
+  editMonthlyTransaction(transactionId, token):Observable<any> {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(AppSettings.API_ENDPOINT+'statistic/getMonthyearcategorytransactionsCount/' + category, user, {headers: headers});
+    return this.http.get(AppSettings.API_ENDPOINT+'transaction/editMobileMonthlyTransaction/'+ transactionId, {headers: headers});
   }
 
-  getyearcategorytransactionsCount(user, category, token):Observable<any> {
+
+  /* Category Tab Functionality Starts */
+  getAllTransactionsByCategory(user, category, token):Observable<any> {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(AppSettings.API_ENDPOINT+'statistic/getyearcategorytransactionsCount/' + category, user, {headers: headers});
+    return this.http.post(AppSettings.API_ENDPOINT+'statistic/getSelectedCategory/' + category, user, {headers: headers});
   }
 
-  getCategoryTransactions(user, category, token):Observable<any> {
+
+  getMonthyearcategorytransactionsLineGraph(user, category, monthyear, token):Observable<any> {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
-    return this.http.post(AppSettings.API_ENDPOINT+'statistic/getCategoryTransactions/' + category, user, {headers: headers});
+    return this.http.post(AppSettings.API_ENDPOINT+'statistic/getMonthcategorytransactionsCount/' + category+'/'+monthyear, user, {headers: headers});
   }
+
+  getCategoryTransactions(user, category, monthyear, token):Observable<any> {
+    const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+    return this.http.post(AppSettings.API_ENDPOINT+'statistic/getCategoryTransactions/' + category+'/'+monthyear, user, {headers: headers});
+  }
+
 
   getMobileCurrentMonthlyMinMaxDates(user, token):Observable<any> {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
@@ -85,9 +88,6 @@ export class TransactionProvider {
     const headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
     return this.http.post(AppSettings.API_ENDPOINT+'statistic/getMobileRangeTransactionsGraph', transaction, {headers: headers});
   }
-
-
-
 
 
 
